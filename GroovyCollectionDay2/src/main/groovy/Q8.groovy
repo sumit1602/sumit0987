@@ -11,14 +11,14 @@ class Employee{
     int age
     int salary
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Employee{" +
+//                "name='" + name + '\'' +
+//                ", age=" + age +
+//                ", salary=" + salary +
+//                '}';
+//    }
 }
 Employee emp1 = new Employee(name: "sumit", age: 21, salary: 10000)
 Employee emp2 = new Employee(name: "anuj", age: 22, salary: 9000)
@@ -41,12 +41,30 @@ List li=[emp1,emp2,emp3,emp4,emp5,emp6, emp7, emp8, emp9, emp10]
 //li.findAll{if(it.salary<5000) print it.name +" "}
 //
 //println li.age.sort(){println li.name}
-li.findAll({  if(it.salary<5000) println it.toString() })
+List listSalary=[]
+li.each{
+    if(it.salary>5000)
+        listSalary.add(it.name)
+}
+println("List of employee having salary greater than 5000 :"+listSalary)
 
-println "Name of the youngest employee and oldest employee: "+li.age.sort().last() +" "+ li.age.sort().first()
 
 
-println "Highest Salary of an employee is: "+ li*.salary.sort().last()
+
+List YoungEmployees=[]
+li.sort{a,b ->a.age<=>b.age}.each {YoungEmployees.add(it.name)}
+println("Youngest employee: "+YoungEmployees.first())
+println("Eldest employee: "+YoungEmployees.last())
+
+//li.findAll({  if(it.salary<5000) println it.toString() })
+
+//println "Name of the youngest employee and oldest employee: "+li.age.sort().last() +" "+ li.age.sort().first()
+
+//println "Highest Salary of an employee is: "+ li*.salary.sort().last()
+
+
+MAX_SAL= li.max{it.salary}
+println "Highest Salary of an employee is: ${MAX_SAL.name}"
 
 println "List of names of all the employees: " + li.name
 
